@@ -31,6 +31,12 @@
         img {
             max-width: 100%;
             height: auto;
+            display: block; /* 使图片独占一行 */
+            margin: 0 auto; /* 居中显示 */
+        }
+        figure {
+            text-align: center; /* 图片标注居中显示 */
+            margin: 1rem 0;
         }
         mark {
             background-color: yellow;
@@ -54,6 +60,10 @@
         .child {
             color: #0066cc;
         }
+        .highlight {
+            background-color: #ffff99; /* 亮黄色背景 */
+            font-weight: bold; /* 加粗 */
+        }
     </style>
 </head>
 <body>
@@ -75,49 +85,73 @@
         <article>
             <h3>海绵宝宝</h3>
             <p>海绵宝宝是一个<em>神经质的海绵方块</em>，在蟹堡王工作并热爱抓水母。</p>
-            <img src="spongebob.jpg" alt="" title="我准备好了，我准备好了！"> <!--https://img2.baidu.com/it/u=4007333070,2351009709&fm=253&fmt=auto&app=138&f=JPEG?w=800&h=800 -->
+            <figure>
+                <img src="spongebob.jpg" alt="海绵宝宝">
+                <figcaption>我准备好了，我准备好了！</figcaption>
+            </figure>
         </article>
 
         <article>
             <h3>小蜗</h3>
             <p>小蜗是海绵宝宝的宠物蜗牛，会发出像猫一样的声音，是他最忠实的伙伴。</p>
-            <img src="gary.jpg" alt="" title="喵～"> <!-- https://img2.baidu.com/it/u=2576646656,1465980278&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500 -->
+            <figure>
+                <img src="gary.jpg" alt="小蜗">
+                <figcaption>喵～</figcaption>
+            </figure>
         </article>
 
         <article>
             <h3>派大星</h3>
             <p>派大星是海绵宝宝的<mark>最好的朋友</mark>，一只以幽默和随性著称的海星。</p>
-            <img src="patrick.jpg" alt="" title="我好像不太懂，但感觉很厉害！"> <!-- https://hbimg.huabanimg.com/8d4e0b6690f6a9fb18d092cfa46642952a10bdca1d24c-mXxnBt_fw658 -->
+            <figure>
+                <img src="patrick.jpg" alt="派大星">
+                <figcaption>我好像不太懂，但感觉很厉害！</figcaption>
+            </figure>
         </article>
 
         <article>
             <h3>章鱼哥</h3>
             <p>章鱼哥是海绵宝宝的邻居，也是蟹堡王的同事。他虽然<strong>脾气暴躁</strong>，但热爱艺术和音乐。</p>
-            <img src="squidward.jpg" alt="" title="别烦我，海绵宝宝！"> <!-- https://img2.baidu.com/it/u=1144888771,3578538397&fm=253&fmt=auto&app=138&f=JPEG?w=800&h=800 -->
+            <figure>
+                <img src="squidward.jpg" alt="章鱼哥">
+                <figcaption>别烦我，海绵宝宝！</figcaption>
+            </figure>
         </article>
 
         <article>
             <h3>蟹老板</h3>
             <p>蟹老板是蟹堡王的老板，对<abbr title="财富">钱</abbr>有着强烈的执念。</p>
-            <img src="mr_krabs.jpg" alt="" title="钱钱钱钱钱！"> <!-- https://pic.rmb.bdstatic.com/bjh/events/d9f1bc0d9245b9f370bae201985761085283.jpeg@h_1280 -->
+            <figure>
+                <img src="mr_krabs.jpg" alt="蟹老板">
+                <figcaption>钱钱钱钱钱！</figcaption>
+            </figure>
         </article>
 
         <article>
             <h3>珊迪</h3>
             <p>珊迪是一只来自德州的松鼠，她<sup>科学地</sup>研究海洋生物，热爱空手道和科学。</p>
-            <img src="sandy.jpg" alt="" title="来一场空手道对决吧！"> <!-- https://img1.baidu.com/it/u=2834348871,1790717904&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500 -->
+            <figure>
+                <img src="sandy.jpg" alt="珊迪">
+                <figcaption>来一场空手道对决吧！</figcaption>
+            </figure>
         </article>
 
         <article>
             <h3>泡芙老师</h3>
             <p>泡芙老师是海绵宝宝的<em>驾驶教练</em>，经常因为他的混乱驾驶风格而头疼。</p>
-            <img src="mrs_puff.jpg" alt="" title="天哪，快让我下车！"> <!-- https://img1.baidu.com/it/u=3485250704,3884493065&fm=253&fmt=auto?w=1280&h=720 -->
+            <figure>
+                <img src="mrs_puff.jpg" alt="泡芙老师">
+                <figcaption>天哪，快让我下车！</figcaption>
+            </figure>
         </article>
 
         <article>
             <h3>痞老板</h3>
             <p>痞老板是蟹堡王的竞争对手，一直试图偷走蟹黄堡的秘密配方。</p>
-            <img src="plankton.jpg" alt="" title="我一定要得到配方！"> <!-- https://b0.bdstatic.com/aa75b9a350308ca306a1100304664735.jpg@h_1280 -->
+            <figure>
+                <img src="plankton.jpg" alt="痞老板">
+                <figcaption>我一定要得到配方！</figcaption>
+            </figure>
         </article>
     </section>
 
@@ -126,4 +160,3 @@
     </footer>
 </body>
 </html>
-

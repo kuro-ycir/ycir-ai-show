@@ -15,18 +15,16 @@
         h1 {
             color: #2c3e50;
             position: relative;
+            font-size: 2em; /* 可以根据需要调整字体大小 */
         }
-        h1 span {
-            position: relative;
-            /* 确保拼音显示在汉字上方 */
-        }
-        h1 span::after {
-            content: attr(data-pinyin);
+        h1::after {
+            content: "nǚ wā bǔ tiān";
             position: absolute;
-            top: -2em; /* 调整拼音的位置，使其位于汉字上方 */
+            top: -1.5em; /* 调整拼音的位置，使其位于汉字上方 */
             left: 0;
-            font-size: 0.8em; /* 拼音字体大小 */
+            font-size: 0.5em; /* 拼音字体大小 */
             color: #888; /* 拼音颜色 */
+            white-space: nowrap; /* 确保拼音在一行内显示 */
         }
         ul {
             list-style-type: square;
@@ -42,19 +40,13 @@
     </style>
 </head>
 <body>
-    <p style="text-align: center; font-size: 1.2em;">nǚ wā bǔ tiān</p>
-    <h1>
-        <span data-pinyin="nǚ">女</span>
-        <span data-pinyin="wā">娲</span>
-        <span data-pinyin="bǔ">补</span>
-        <span data-pinyin="tiān">天</span>
-    </h1>
+    <h1>女娲补天</h1>
 
-    <p>“女娲补天”指中国古代神话，女娲炼石补天拯救黎民。形容改造天地的雄伟气魄和大无畏的斗争精神。以下是对该成语的详细解释：</p>
+    <p>“女娲补天”是一则著名的中国神话故事和成语，以下是对该成语的详细解释：</p>
 
     <ul>
-        <li><strong>出处：</strong>该成语出自西汉·刘安《淮南子·览冥训》：“于是女娲炼五色石以补苍天。”，描述女娲为了拯救苍生，用五彩石修补破裂的天空。</li>
-        <li><strong>寓意：</strong>《女娲补天》是中国最古老的创世神话之一，写女娲改造自然、拯救人类的故事。女娲在与自然灾害作斗争中，表现出改造天地的雄伟气魄和高度的智慧，成为人民歌颂的英雄，反映了母系氏族社会女性的地位及影响，歌颂了人们理想中拯救世界的女神，显示了人类与自然斗争的气魄和力量。成语告诉人们，坚强的意志和毅力是事业成功的保证，明知不可为而为之，明知难为而尽力为之，拼尽浑身力气，想尽种种办法，事情再艰难也终会有所起色。</li>
+        <li><strong>出处：</strong>该成语出自《淮南子·览冥训》，描述女娲为了拯救苍生，用五彩石修补破裂的天空。</li>
+        <li><strong>寓意：</strong>象征坚韧不拔、不畏困难的精神，以及挽救危局、修复缺陷的能力。</li>
         <li><strong>故事背景：</strong>天崩地裂，洪水滔天，女娲肩负着挽救天地的重任，最后成功恢复世界的秩序。</li>
     </ul>
 

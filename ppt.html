@@ -5,6 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>泰坦尼克号网页PPT</title>
 <style>
+  :root {
+    --color-slide1: #6a1b9a; /* 紫色 */
+    --color-slide2: #0d47a1; /* 深蓝色 */
+    --color-slide3: #ef6c00; /* 橙色 */
+  }
   body, html {
     margin: 0;
     padding: 0;
@@ -17,24 +22,27 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    background-color: #013220; /* 深绿色 */
     color: white;
     transition: all 0.5s ease;
   }
   .slide.active {
     display: flex;
   }
+  #slide1 { background-color: var(--color-slide1); }
+  #slide2 { background-color: var(--color-slide2); }
+  #slide3 { background-color: var(--color-slide3); }
   .content {
     text-align: center;
   }
   .next-btn, .prev-btn {
     cursor: pointer;
     padding: 10px 20px;
-    background-color: #004d40;
     color: white;
     border: none;
     margin: 10px;
   }
+  .next-btn { background-color: #0d47a1; }
+  .prev-btn { background-color: #6a1b9a; }
   .controls {
     position: absolute;
     bottom: 20px;

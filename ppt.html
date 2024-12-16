@@ -9,7 +9,7 @@
     margin: 0;
     padding: 0;
     font-family: 'Arial', sans-serif;
-    overflow-x: hidden; /* 防止水平滚动 */
+    overflow-x: hidden;
   }
 
   .slides-container {
@@ -26,7 +26,6 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    transition: background-color 0.5s ease;
     position: relative;
   }
 
@@ -59,14 +58,17 @@
 
   .active h1 {
     opacity: 1;
+    pointer-events: auto;
   }
 
   .show-text p {
     opacity: 1;
+    pointer-events: auto;
   }
 
   .show-image img {
     opacity: 1;
+    pointer-events: auto;
   }
 </style>
 </head>
@@ -98,28 +100,24 @@ let displayState = 'title'; // Possible states: 'title', 'text', 'image'
 
 function showContent() {
   const slide = slides[currentSlideIndex];
-  switch (displayState) {
-    case 'title':
-      slide.classList.add('active');
-      displayState = 'text';
-      break;
-    case 'text':
-      slide.classList.add('show-text');
-      displayState = 'image';
-      break;
-    case 'image':
-      slide.classList.add('show-image');
-      displayState = 'title'; // Reset
-          // Reset to title state and move to the next slide
-    currentSlideIndex++;
-    if (currentSlideIndex >= slides.length) {
-      currentSlideIndex = 0;
-    }
+
+  if (displayState === 'title') {
+    slide.classList.add('active');
+    displayState = 'text';
+  } else if (displayState === 'text') {
+    slide.classList.add('show-text');
+    displayState = 'image';
+  } else if (displayState === 'image') {
+    slide.classList.add('show-image');
     displayState = 'title';
-    resetSlides();
-    moveSlide();
-    break;
+    moveToNextSlide();
   }
+}
+
+function moveToNextSlide() {
+  currentSlideIndex = (currentSlideIndex + 1) % slides.length;
+  slidesContainer.style.transform = `translateX(-${currentSlideIndex * 100}vw)`;
+  resetSlides();
 }
 
 function resetSlides() {
@@ -128,9 +126,10 @@ function resetSlides() {
   });
 }
 
-function moveSlide() {
-  slidesContainer.style.transform = `translateX(-${currentSlideIndex * 100}vw)`;
-}
+// Click event to show content
+slides.forEach(slide => {
+  slide.addEventListener('click', showContent);
+});
 
 // Swipe detection
 let touchStartX = 0;
@@ -147,28 +146,20 @@ slidesContainer.addEventListener('touchend', e => {
 
 function handleSwipe() {
   if (touchStartX - touchEndX > 50) {
-    // Swipe left, go to next slide
-    currentSlideIndex++;
-    if (currentSlideIndex >= slides.length) {
-      currentSlideIndex = 0;
-    }
+    moveToNextSlide();
   } else if (touchEndX - touchStartX > 50) {
-    // Swipe right, go to previous slide
-    currentSlideIndex--;
-    if (currentSlideIndex < 0) {
-      currentSlideIndex = slides.length - 1;
-    }
+    currentSlideIndex = (currentSlideIndex - 1 + slides.length) % slides.length;
+    slidesContainer.style.transform = `translateX(-${currentSlideIndex * 100}vw)`;
+    resetSlides();
   }
-  displayState = 'title'; // Reset to title state on slide change
-  resetSlides();
-  moveSlide();
 }
 
-// Click event to show content
-slides.forEach(slide => {
-  slide.addEventListener('click', showContent);
-});
-
 // Initialize the first slide
-moveSlide();
+resetSlides();
+slides[0].classList.add('active');
+</script>
+
+</body>
+</html>
+
 

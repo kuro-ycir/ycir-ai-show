@@ -110,4 +110,65 @@ function showContent() {
     case 'image':
       slide.classList.add('show-image');
       displayState = 'title'; // Reset
-      
+          // Reset to title state and move to the next slide
+    currentSlideIndex++;
+    if (currentSlideIndex >= slides.length) {
+      currentSlideIndex = 0;
+    }
+    displayState = 'title';
+    resetSlides();
+    moveSlide();
+    break;
+  }
+}
+
+function resetSlides() {
+  slides.forEach(slide => {
+    slide.classList.remove('active', 'show-text', 'show-image');
+  });
+}
+
+function moveSlide() {
+  slidesContainer.style.transform = `translateX(-${currentSlideIndex * 100}vw)`;
+}
+
+// Swipe detection
+let touchStartX = 0;
+let touchEndX = 0;
+
+slidesContainer.addEventListener('touchstart', e => {
+  touchStartX = e.touches[0].clientX;
+});
+
+slidesContainer.addEventListener('touchend', e => {
+  touchEndX = e.changedTouches[0].clientX;
+  handleSwipe();
+});
+
+function handleSwipe() {
+  if (touchStartX - touchEndX > 50) {
+    // Swipe left, go to next slide
+    currentSlideIndex++;
+    if (currentSlideIndex >= slides.length) {
+      currentSlideIndex = 0;
+    }
+  } else if (touchEndX - touchStartX > 50) {
+    // Swipe right, go to previous slide
+    currentSlideIndex--;
+    if (currentSlideIndex < 0) {
+      currentSlideIndex = slides.length - 1;
+    }
+  }
+  displayState = 'title'; // Reset to title state on slide change
+  resetSlides();
+  moveSlide();
+}
+
+// Click event to show content
+slides.forEach(slide => {
+  slide.addEventListener('click', showContent);
+});
+
+// Initialize the first slide
+moveSlide();
+

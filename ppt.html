@@ -9,16 +9,31 @@
     margin: 0;
     padding: 0;
     font-family: 'Arial', sans-serif;
+    overflow-x: hidden; /* 防止水平滚动 */
+  }
+
+  .slides-container {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    transition: transform 0.5s ease;
   }
 
   .slide {
-    width: 100%;
+    flex: 0 0 100vw;
     height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
     transition: background-color 0.5s ease;
+    position: relative;
+  }
+
+  .slide h1, .slide p, .slide img {
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    pointer-events: none;
   }
 
   .slide h1 {
@@ -42,79 +57,57 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
   }
 
-  .button {
-    padding: 10px 20px;
-    margin-top: 20px;
-    font-size: 1.2em;
-    color: white;
-    background-color: #333;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+  .active h1 {
+    opacity: 1;
   }
 
-  .button:hover {
-    background-color: #555;
+  .show-text p {
+    opacity: 1;
   }
 
-  #prevBtn {
-    position: absolute;
-    top: 50%;
-    left: 10px;
-    transform: translateY(-50%);
-  }
-
-  #nextBtn {
-    position: absolute;
-    top: 50%;
-    right: 10px;
-    transform: translateY(-50%);
+  .show-image img {
+    opacity: 1;
   }
 </style>
 </head>
 <body>
 
-<div class="slide" style="background-color: #5A6D62;">
-  <h1>泰坦尼克号</h1>
-  <p>一段永恒的爱情故事，沉没的巨轮，永不沉没的梦想。</p>
-  <img src="https://lh3.googleusercontent.com/proxy/OiDwwVod6NL90SuP2DnfR9OPqnYj2txE371gwJ0RmVCMyh7XmMFKjNi65WTzQG7gbeExFxczLDAMebL38gDzv4CR-VZ5BEI6ELEPsd51YA7q026_r6s-Z-q6axDSIs_x_VZ1" alt="Titanic Image 1">
+<div class="slides-container">
+  <div class="slide" style="background-color: #5A6D62;">
+    <h1>泰坦尼克号</h1>
+    <p>一段永恒的爱情故事，沉没的巨轮，永不沉没的梦想。</p>
+    <img src="https://lh3.googleusercontent.com/proxy/OiDwwVod6NL90SuP2DnfR9OPqnYj2txE371gwJ0RmVCMyh7XmMFKjNi65WTzQG7gbeExFxczLDAMebL38gDzv4CR-VZ5BEI6ELEPsd51YA7q026_r6s-Z-q6axDSIs_x_VZ1" alt="Titanic Image 1">
+  </div>
+  <div class="slide" style="background-color: #7F8C8D;">
+    <h1>杰克与露丝</h1>
+    <p>他们的相遇改变了一切，在泰坦尼克号的甲板上，两颗心紧紧相连。</p>
+    <img src="https://img1.baidu.com/it/u=3858113206,1779760178&fm=253&fmt=auto&app=120&f=JPEG?w=889&h=500" alt="Titanic Image 2">
+  </div>
+  <div class="slide" style="background-color: #BDC3C7;">
+    <h1>永恒的回忆</h1>
+    <p>尽管悲剧发生，但泰坦尼克号的故事和它的乘客们将永远被铭记。</p>
+    <img src="https://pic1.zhimg.com/v2-209b109fd5738aa6835df23193b1bbd5_720w.jpg?source=172ae18b" alt="Titanic Image 3">
+  </div>
 </div>
-
-<div class="slide" style="background-color: #7F8C8D; display: none;">
-  <h1>杰克与露丝</h1>
-  <p>他们的相遇改变了一切，在泰坦尼克号的甲板上，两颗心紧紧相连。</p>
-  <img src="https://img1.baidu.com/it/u=3858113206,1779760178&fm=253&fmt=auto&app=120&f=JPEG?w=889&h=500" alt="Titanic Image 2">
-</div>
-
-<div class="slide" style="background-color: #BDC3C7; display: none;">
-  <h1>永恒的回忆</h1>
-  <p>尽管悲剧发生，但泰坦尼克号的故事和它的乘客们将永远被铭记。</p>
-  <img src="https://pic1.zhimg.com/v2-209b109fd5738aa6835df23193b1bbd5_720w.jpg?source=172ae18b" alt="Titanic Image 3">
-</div>
-
-<button class="button" id="prevBtn" onclick="plusSlides(-1)">&#10094;</button>
-<button class="button" id="nextBtn" onclick="plusSlides(1)">&#10095;</button>
 
 <script>
-let slideIndex = 1;
-showSlides(slideIndex);
+let currentSlideIndex = 0;
+const slides = document.querySelectorAll('.slide');
+const slidesContainer = document.querySelector('.slides-container');
+let displayState = 'title'; // Possible states: 'title', 'text', 'image'
 
-function plusSlides(n) {
-  showSlides(slideIndex += n);
-}
-
-function showSlides(n) {
-  let i;
-  let slides = document.querySelectorAll('.slide');
-  if (n > slides.length) {slideIndex = 1}
-  if (n < 1) {slideIndex = slides.length}
-  for (i = 0; i < slides.length; i++) {
-    slides[i].style.display = "none";
-  }
-  slides[slideIndex-1].style.display = "flex";
-}
-</script>
-
-</body>
-</html>
+function showContent() {
+  const slide = slides[currentSlideIndex];
+  switch (displayState) {
+    case 'title':
+      slide.classList.add('active');
+      displayState = 'text';
+      break;
+    case 'text':
+      slide.classList.add('show-text');
+      displayState = 'image';
+      break;
+    case 'image':
+      slide.classList.add('show-image');
+      displayState = 'title'; // Reset
+      

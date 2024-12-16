@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>泰坦尼克号网页PPT</title>
+<style>
+  body, html {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+  }
+  .slide {
+    width: 100%;
+    height: 100vh;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: #013220; /* 深绿色 */
+    color: white;
+    transition: all 0.5s ease;
+  }
+  .slide.active {
+    display: flex;
+  }
+  .content {
+    text-align: center;
+  }
+  .next-btn, .prev-btn {
+    cursor: pointer;
+    padding: 10px 20px;
+    background-color: #004d40;
+    color: white;
+    border: none;
+    margin: 10px;
+  }
+  .controls {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: center;
+  }
+</style>
+</head>
+<body>
+
+<div id="slide1" class="slide active">
+  <div class="content">
+    <h1>泰坦尼克号</h1>
+    <p>1912年4月10日，泰坦尼克号从英国南安普顿出发，开始了它的处女航。</p>
+    <img src="titanic-ship.jpg" alt="泰坦尼克号" width="300">
+    <div class="controls">
+      <button class="next-btn" onclick="nextSlide()">下一页</button>
+    </div>
+  </div>
+</div>
+
+<div id="slide2" class="slide">
+  <div class="content">
+    <h1>杰克和露丝</h1>
+    <p>在泰坦尼克号上，穷画家杰克与贵族女露丝坠入爱河。</p>
+    <img src="jack-and-rose.jpg" alt="杰克和露丝" width="300">
+    <div class="controls">
+      <button class="prev-btn" onclick="prevSlide()">上一页</button>
+      <button class="next-btn" onclick="nextSlide()">下一页</button>
+    </div>
+  </div>
+</div>
+
+<div id="slide3" class="slide">
+  <div class="content">
+    <h1>沉船悲剧</h1>
+    <p>1912年4月14日，泰坦尼克号撞上冰山，最终沉没。</p>
+    <img src="titanic-sinking.jpg" alt="泰坦尼克号沉没" width="300">
+    <div class="controls">
+      <button class="prev-btn" onclick="prevSlide()">上一页</button>
+    </div>
+  </div>
+</div>
+
+<script>
+let currentSlide = 1;
+
+function showSlide(n) {
+  const slides = document.querySelectorAll('.slide');
+  slides.forEach(slide => {
+    slide.classList.remove('active');
+  });
+  document.getElementById('slide' + n).classList.add('active');
+}
+
+function nextSlide() {
+  if(currentSlide < document.querySelectorAll('.slide').length) {
+    currentSlide++;
+    showSlide(currentSlide);
+  }
+}
+
+function prevSlide() {
+  if(currentSlide > 1) {
+    currentSlide--;
+    showSlide(currentSlide);
+  }
+}
+
+// 初始化显示第一页
+showSlide(currentSlide);
+</script>
+
+</body>
+</html>
